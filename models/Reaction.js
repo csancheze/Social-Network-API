@@ -5,7 +5,7 @@ const formatDate = (date) => {
 }
 const reactionSchema = new Schema(
   {
-    assignmentId: {
+    reactionId: {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },
@@ -24,12 +24,6 @@ const reactionSchema = new Schema(
       get: formatDate,
     },
   },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-    id: false,
-  }
 );
 
 
