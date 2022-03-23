@@ -1,5 +1,8 @@
 const { Schema, Types } = require('mongoose');
 
+const formatDate = (date) => {
+  return date.toLocaleDateString();
+}
 const reactionSchema = new Schema(
   {
     assignmentId: {

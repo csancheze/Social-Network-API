@@ -1,4 +1,5 @@
 const { User, Thought } = require('../models');
+const { ObjectId } = require('mongoose').Types;
 
 module.exports = {
   getUsers(req, res) {
@@ -8,12 +9,12 @@ module.exports = {
   },
 
   getSingleUser(req, res) {
-    User.findOne({ _id: req.params.userId })
+    User.findOne({ _id: ObjectId(req.params.userId) })
       .select('-__v')
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user with that ID' })
-          : res.json(course)
+          : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
@@ -57,7 +58,7 @@ addFriend(req, res) {
   console.log(req.body);
   User.findOneAndUpdate(
     { _id: req.params.userId },
-    { $addToSet: { friends: req.params.friendId } },
+    { $addToSet: { friends: ObjectId(req.params.friendId) } },
     { runValidators: true, new: true }
   )
     .then((user) =>
@@ -73,14 +74,14 @@ addFriend(req, res) {
 removeFriend(req, res) {
   User.findOneAndUpdate(
     { _id: req.params.userId },
-    { $pull: { friends: { friendsId: req.params.friendId } } },
+    { $pull: { friends: req.params.friendId } },
     { runValidators: true, new: true }
   )
     .then((user) =>
       !user
         ? res
             .status(404)
-            .json({ message: 'No thought found with that ID :(' })
+            .json({ message: 'No user found with that ID :(' })
         : res.json(user)
     )
     .catch((err) => res.status(500).json(err));
