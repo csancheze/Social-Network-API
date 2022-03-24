@@ -28,7 +28,8 @@ After installing, open Insomnia for testing the routes or add them to your front
 
   
   
-![Social Network API webpage working as expected](assets/images/screenshot.png)
+![Social Network API webpage working as expected](assets/screenshot.png)
+![Social Network API webpage working as expected](assets/screenshot1.png)
   
   ## License
   
